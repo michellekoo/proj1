@@ -1,3 +1,35 @@
 <h3>Trainer</h3>
 <p>Name: <%= @trainer.name if @trainer.name %></p>
 <p>Email: <%= @trainer.email if @trainer.email %></p>
+<h3> List of Pokemons below: </h3>
+<% @trainer.pokemons.each do |pokemon| %>
+	<% if @trainer != current_trainer %>
+		<% if pokemon.health > 0 %>
+		  <p> Pokemon Name: <%= pokemon.name %> </p>
+		  <p> Pokemon Level: <%= pokemon.level %> </p>
+		  <p> Pokemon Health: <%= pokemon.health %> </p>
+		  <p>Choose your Pokemon below to battle and gain experience!</p>
+			<select name="pokemon_id">
+		      <%= current_trainer.pokemons.each do |poke| %>
+		        <option value="<%= poke.id %>"><%= poke.name %></option>
+		      <% end %>
+		    </select>
+		  <%= button_to "Damage a Pokemon!", damage_path(id: pokemon), :class => "button medium", :method => :patch %>
+		<% end %>
+	<% else %>
+		<p> Pokemon Name: <%= pokemon.name %> </p>
+		<p> Pokemon Level: <%= pokemon.level %> </p>
+		<p> Pokemon Health: <%= pokemon.health %> </p>
+		<%= button_to "Damage a Pokemon!", damage_path(id: pokemon), :class => "button medium", :method => :patch %>
+		<%= button_to "Heal a Pokemon!", heal_path(id: pokemon), :class => "button medium", :method => :patch %>
+	<% end %>
+<% end %>
+
+<% if @trainer == current_trainer %>
+	<%= link_to "Create a Pokemon!", new_pokemon_path %>
+<% end %>
+
+<br>
+<br>
+<br>
+
