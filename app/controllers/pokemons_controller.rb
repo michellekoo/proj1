@@ -16,8 +16,6 @@ class PokemonsController < ApplicationController
 			@pokemon.save
 		end
 		redirect_to trainer_path id: @pokemon.trainer_id
-		# redirect_to trainer_path Trainer.find(5)
-		# redirect_to Trainer.find(5)
 	end
 
 	def heal
@@ -34,8 +32,6 @@ class PokemonsController < ApplicationController
 	end
 
 	def create
-		#@pokemon_gain_experience = params[:pokemon_id]
-		#@pokemon_gain_experience.level += 1
 		@pokemon = Pokemon.create pokemon_params
 		@pokemon.trainer_id = current_trainer.id
 		check_saved = @pokemon.save

@@ -2,19 +2,18 @@
 <p>Name: <%= @trainer.name if @trainer.name %></p>
 <p>Email: <%= @trainer.email if @trainer.email %></p>
 <h3> List of Pokemons below: </h3>
+
 <% @trainer.pokemons.each do |pokemon| %>
 	<% if @trainer != current_trainer %>
 		<% if pokemon.health > 0 %>
 		  <p> Pokemon Name: <%= pokemon.name %> </p>
 		  <p> Pokemon Level: <%= pokemon.level %> </p>
 		  <p> Pokemon Health: <%= pokemon.health %> </p>
-		  <p>Choose your Pokemon below to battle and gain experience!</p>
-			<select name="pokemon_id">
-		      <%= current_trainer.pokemons.each do |poke| %>
-		        <option value="<%= poke.id %>"><%= poke.name %></option>
-		      <% end %>
-		    </select>
+		  <%= simple_form_for pokemon do |f| %>
+			  <%= f.input :name, collection: current_trainer.pokemons.all.collect {|p| [p.name, p.id]}%>
+		  <% end %>
 		  <%= button_to "Damage a Pokemon!", damage_path(id: pokemon), :class => "button medium", :method => :patch %>
+		  
 		<% end %>
 	<% else %>
 		<p> Pokemon Name: <%= pokemon.name %> </p>
@@ -26,7 +25,7 @@
 <% end %>
 
 <% if @trainer == current_trainer %>
-	<%= link_to "Create a Pokemon!", new_pokemon_path %>
+	<%= button_to "Create a Pokemon", new_pokemon_path, :class => "button medium", :method => :get %>
 <% end %>
 
 <br>

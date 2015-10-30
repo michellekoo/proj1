@@ -24,6 +24,9 @@ It shows a red error message at the top of the application that can be closed by
 
 # Give us feedback on the project and decal below!
 
+I love this decal! I just wish there were more example code that we could reference. I'm excited for project 2!
+
 The project was awesome and really fun! I just wish that all code from lecture or a written description of the steps (like a guide) would be available for reference instead of having to re-watch lectures over and over.
 
 # Extra credit: Link your Heroku deployed app
+https://aqueous-coast-1908.herokuapp.com/
